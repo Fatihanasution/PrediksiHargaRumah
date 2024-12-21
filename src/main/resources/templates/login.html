@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            background: url('/images/login.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #f5f5dc; /* Cream color */
+            color: black;
+            width: 25rem;
+            border-radius: 10px;
+            padding: 5em 2rem;
+            box-shadow: 0px 0px 20px 0px black;
+            border: 1px solid black;
+        }
+
+        .login-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .userName,
+        .userPassword {
+            text-align: center;
+            border: 2px solid #2c3e50; /* Border abu tua */
+            margin: 1rem;
+            color: #2c3e50; /* Teks abu tua */
+            background: transparent;
+            padding: 1rem 2rem;
+            border-radius: 3rem;
+            width: 15rem;
+            font-size: 1.2rem;
+            outline: none;
+            transition: all .2s ease-in-out;
+        }
+
+        .userName:focus,
+        .userPassword:focus {
+            width: 20rem;
+            border-color: #2c3e50; /* Border tetap abu tua saat fokus */
+        }
+
+        .loginBtn {
+            background: transparent;
+            border: 2px solid #2c3e50; /* Border abu tua */
+            padding: 1rem 3rem;
+            border-radius: 6rem;
+            text-decoration: underline;
+            font-size: 1rem;
+            color: #2c3e50; /* Teks abu tua */
+            cursor: pointer;
+            transition: all .3s ease-in-out;
+        }
+
+        .loginBtn:hover {
+            background: #2c3e50; /* Latar belakang abu tua */
+            border: 2px solid #2c3e50;
+            color: white; /* Teks putih */
+        }
+
+        .error-message {
+            color: red;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+        <h2 class="login-title">Login</h2>
+        <!-- Pesan error jika login gagal -->
+        <div th:if="${errorMessage}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+        </div>
+
+        <!-- Form login yang mengarah ke /login dengan metode POST -->
+        <form action="/login" method="post">
+            <input type="text" name="username" class="userName" placeholder="Username" required>
+            <input type="password" name="password" class="userPassword" placeholder="Password" required>
+            <button type="submit" class="loginBtn">Login</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

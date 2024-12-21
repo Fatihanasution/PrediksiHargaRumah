@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediksi Harga Rumah</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('/images/rumah.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            margin: 100px auto;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .form-container input[type="number"],
+        .form-container input[type="submit"],
+        .form-container input[type="reset"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-container input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .form-container input[type="reset"] {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-container input[type="reset"]:hover {
+            background-color: #e53935;
+        }
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+        @media (max-width: 600px) {
+            .form-container {
+                width: 90%;
+            }
+        }
+        /* Styling untuk tombol logout di pojok kanan bawah */
+        .logout-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .logout-btn:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form action="/predict" method="get">
+            <fieldset>
+                <legend>Masukkan Data Rumah</legend>
+                <label for="kamarTidur">Jumlah kamar tidur:</label>
+                <input type="number" id="kamarTidur" name="kamarTidur" required placeholder="Contoh: 3">
+
+                <label for="kamarMandi">Jumlah kamar mandi:</label>
+                <input type="number" id="kamarMandi" name="kamarMandi" required placeholder="Contoh: 2">
+
+                <label for="luasRumah">Luas rumah (m²):</label>
+                <input type="number" id="luasRumah" name="luasRumah" required placeholder="Contoh: 120">
+
+                <label for="lantai">Jumlah lantai:</label>
+                <input type="number" id="lantai" name="lantai" required placeholder="Contoh: 1">
+
+                <input type="submit" value="Prediksi">
+                <input type="reset" value="Reset">
+            </fieldset>
+        </form>
+        <div class="result">
+            <!-- Menampilkan hasil prediksi atau pesan default -->
+            <p th:text="${result != null ? result : 'Hasil prediksi akan tampil di sini'}"></p>
+        </div>
+    </div>
+
+    <!-- Tombol logout di pojok kanan bawah -->
+    <a href="/logout">
+        <button class="logout-btn">Logout</button>
+    </a>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            const inputs = document.querySelectorAll('input[type="number"]');
+            for (let input of inputs) {
+                if (!input.value) {
+                    alert("Semua kolom harus diisi!");
+                    event.preventDefault();
+                    return;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
